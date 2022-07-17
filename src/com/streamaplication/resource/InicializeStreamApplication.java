@@ -18,7 +18,13 @@ public class InicializeStreamApplication extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		InputTopic it = controller.convertRequestToInputTopic(req);
-		System.out.println(it.getClientId());
+		if (it.getClientId() == null) {
+			this.controller.flushPrintWriter(resp, "Precisa informar 'ClientId' como parâmetro.");
+		} else if (controller.clientExist(it.getClientId())) {
+			this.controller.flushPrintWriter(resp, "Aguarde alguns minutos");
+		} else {
+
+		}
 	}  
 	
 }

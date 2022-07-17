@@ -3,6 +3,7 @@ import static org.junit.Assert.assertEquals;
 import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -18,6 +19,7 @@ public class StreamApplicationTest {
 	private HttpServletRequest request;
 	private StreamApplicationController controller;
 	private InputTopic inputTopic;
+	private HttpServletResponse response;
 	
 	
 	@Before
@@ -26,6 +28,8 @@ public class StreamApplicationTest {
 		StreamApplicationRequest streamRequest = new StreamApplicationRequest();
 		this.request = streamRequest.getHttpServletRequest();
 		this.inputTopic = controller.convertRequestToInputTopic(this.request);
+		StreamApplicationResponse streamResponse = new StreamApplicationResponse();
+		this.response = streamResponse.getHttpServletResponse();
 	}
 	
 	@Test
@@ -49,4 +53,8 @@ public class StreamApplicationTest {
 		Assert.assertTrue(!controller.clientExist(this.inputTopic.getClientId()));
 	}
 	
+	@Test
+	public void flushPrintWriter() throws Exception {
+		this.controller.flushPrintWriter(this.response, "Enviando mensagem de teste.");
+	}
 }
