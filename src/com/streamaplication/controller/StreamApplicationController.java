@@ -16,7 +16,7 @@ import com.streamaplication.util.Util;
 
 public class StreamApplicationController extends Util {
 	
-	private final String ACCESSKEY = "2316613d43bfb16652cf2dadd7a4eb95";
+	private final String ACCESSKEY = "c7efb9561b3fa3aeb00de7d5011b84d5";
 	private final String URLIPSTACK = "http://api.ipstack.com/";
 	
 	private Gson g = new Gson();
