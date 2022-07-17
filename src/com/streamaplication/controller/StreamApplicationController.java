@@ -1,15 +1,22 @@
 package com.streamaplication.controller;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URL;
 
 import javax.servlet.http.HttpServletRequest;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.streamaplication.model.InputTopic;
+import com.streamaplication.model.ResponseIpStack;
 import com.streamaplication.util.Util;
 
 public class StreamApplicationController extends Util {
+	
+	private final String ACCESSKEY = "2316613d43bfb16652cf2dadd7a4eb95";
+	private final String URLIPSTACK = "http://api.ipstack.com/";
 	
 	private Gson g = new Gson();
 
@@ -36,5 +43,23 @@ public class StreamApplicationController extends Util {
 		}
 		
 		return it;
+	}
+	
+	public String sendRequestToIpStack(InputTopic it, HttpServletRequest req) throws IOException {
+		URL whatismylocation;
+		if(it.getIp() != null) {
+			whatismylocation = new URL(URLIPSTACK+it.getIp()+"?access_key="+ACCESSKEY);
+		} else {
+			whatismylocation = new URL(URLIPSTACK+getForwarderIpRequest(req)+"?access_key="+ACCESSKEY);
+		}
+		BufferedReader in = new BufferedReader(new InputStreamReader(whatismylocation.openStream()));
+		String json = in.readLine();
+		
+		return json;
+	}
+	
+	public ResponseIpStack convertJsonToResponseIpStack(String json) throws JsonSyntaxException, IOException {
+		ResponseIpStack ris = g.fromJson(json, ResponseIpStack.class);
+		return ris;
 	}
 }

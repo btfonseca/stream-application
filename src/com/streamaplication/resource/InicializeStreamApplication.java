@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.streamaplication.controller.StreamApplicationController;
 import com.streamaplication.model.InputTopic;
+import com.streamaplication.model.ResponseIpStack;
 
 public class InicializeStreamApplication extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -23,6 +24,8 @@ public class InicializeStreamApplication extends HttpServlet {
 		} else if (controller.clientExist(it.getClientId())) {
 			this.controller.flushPrintWriter(resp, "Aguarde alguns minutos");
 		} else {
+			String json = controller.sendRequestToIpStack(it, req);
+			ResponseIpStack ipStack = controller.convertJsonToResponseIpStack(json);
 
 		}
 	}  
