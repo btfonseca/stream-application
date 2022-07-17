@@ -9,7 +9,7 @@ http://java.sun.com/xml/ns/j2ee/web-app_3_0.xsd"
 	
 	<servlet>
 	    <servlet-name>web-servlet-api</servlet-name>
-		<servlet-class>com.streamaplication.resource.InicializeServletApi</servlet-class>
+		<servlet-class>com.streamaplication.resource.InicializeStreamApplication</servlet-class>
 	</servlet>
 	
 	<servlet-mapping>
