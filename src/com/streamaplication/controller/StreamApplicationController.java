@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.streamaplication.model.InputTopic;
+import com.streamaplication.model.OutputTopic;
 import com.streamaplication.model.ResponseIpStack;
 import com.streamaplication.util.Util;
 
@@ -61,5 +62,21 @@ public class StreamApplicationController extends Util {
 	public ResponseIpStack convertJsonToResponseIpStack(String json) throws JsonSyntaxException, IOException {
 		ResponseIpStack ris = g.fromJson(json, ResponseIpStack.class);
 		return ris;
+	}
+	
+	public String setOutputTopic(InputTopic it, ResponseIpStack ris) {
+		OutputTopic ot = new OutputTopic();
+		ot.setClientId(it.getClientId());
+		ot.setTimestamp(it.getTimestamp());
+		ot.setIp(it.getIp());
+		ot.setLatitude(ris.getLatitude());
+		ot.setLongitude(ris.getLongitude());
+		ot.setCountry(ris.getCountryName());
+		ot.setRegion(ris.getRegionName());
+		ot.setCity(ris.getCity());
+		
+		String output = g.toJson(ot);
+		
+		return output;
 	}
 }

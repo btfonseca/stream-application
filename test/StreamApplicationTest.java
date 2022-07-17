@@ -73,6 +73,13 @@ public class StreamApplicationTest {
 		assertEquals(ResponseIpStack.class, this.responseIpStack.getClass());
 	}
 	
+	@Test
+	public void setOutputTopic() throws Exception {
+		this.inputTopic = this.controller.convertRequestToInputTopic(request);
+		this.responseIpStack = this.controller.convertJsonToResponseIpStack(jsonIpStack);
+		assertEquals(String.class, controller.setOutputTopic(this.inputTopic, this.responseIpStack).getClass());
+	}
+	
 	
 	//TODO TESTE DE INTEGRAçÂO
 	@Test
