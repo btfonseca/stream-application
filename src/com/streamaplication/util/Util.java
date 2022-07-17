@@ -4,7 +4,11 @@ import java.time.Instant;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.streamaplication.cache.GenericCache;
+
 public class Util {
+	
+	private GenericCache<String, Long> cache = new GenericCache<>();
 	
 	public long getEpochMilli() {
 		return Instant.now().toEpochMilli();
@@ -16,5 +20,9 @@ public class Util {
 		    ipAddress = req.getRemoteAddr();  
 		}
 		return ipAddress;
+	}
+	
+	public Boolean clientExist(String clientId ) {
+		return this.cache.get(clientId).isPresent();
 	}
 }
