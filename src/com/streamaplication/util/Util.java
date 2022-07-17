@@ -36,4 +36,8 @@ public class Util {
 	    out.print(message);
 	    out.flush(); 
 	}
+	
+	public void addClientInCache(String clientId, long epoch) {
+		this.cache.put(clientId, epoch);
+	}
 }

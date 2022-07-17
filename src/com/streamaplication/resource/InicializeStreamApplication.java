@@ -26,6 +26,7 @@ public class InicializeStreamApplication extends HttpServlet {
 		} else {
 			String json = controller.sendRequestToIpStack(it, req);
 			ResponseIpStack ipStack = controller.convertJsonToResponseIpStack(json);
+			controller.addClientInCache(it.getClientId(), controller.getEpochMilli());
 
 		}
 	}  

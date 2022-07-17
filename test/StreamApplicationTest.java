@@ -63,11 +63,6 @@ public class StreamApplicationTest {
 	}
 	
 	@Test
-	public void testClientNotExist() throws Exception {
-		Assert.assertTrue(!controller.clientExist(this.inputTopic.getClientId()));
-	}
-	
-	@Test
 	public void flushPrintWriter() throws Exception {
 		this.controller.flushPrintWriter(this.response, "Enviando mensagem de teste.");
 	}
@@ -84,5 +79,16 @@ public class StreamApplicationTest {
 	public void testGetIpStack() throws Exception {
 		InputTopic it = new InputTopic();
 		Assert.assertEquals(String.class, controller.sendRequestToIpStack(it, this.request).getClass());
+	}
+	
+	@Test
+	public void testAddClienInCache() throws Exception {
+		String clientId = "Bruno";
+		this.controller.addClientInCache(clientId, 1658005264404L);
+	}
+	
+	@Test
+	public void testClientNotExist() throws Exception {
+		Assert.assertTrue(!controller.clientExist(this.inputTopic.getClientId()));
 	}
 }
