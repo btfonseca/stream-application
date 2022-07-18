@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 public class GenericCache<K, V> implements IGenericCache<K, V> {
 
-    public static final Long DEFAULT_CACHE_TIMEOUT = 1L;
+    public static final Long DEFAULT_CACHE_TIMEOUT = 30L;
 
     protected Map<K, CacheValue<V>> cacheMap;
     protected Long cacheTimeout;

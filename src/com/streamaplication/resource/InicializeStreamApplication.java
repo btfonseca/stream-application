@@ -29,8 +29,6 @@ public class InicializeStreamApplication extends HttpServlet {
 			controller.addClientInCache(it.getClientId(), controller.getEpochMilli());
 			String output = controller.setOutputTopic(it, ipStack);
 			controller.flushPrintWriter(resp, output);
-
 		}
 	}  
-	
 }
